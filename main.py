@@ -134,3 +134,117 @@ while Amount_of_Money < Payment:
         Return_of_Money = Amount_of_Money2 - Payment
         print(f"Uang Kembali Anda: {Return_of_Money}")
         break
+
+
+#========EXERCISE 4 MARKET PROJECT========#
+
+# Create a list menu to produce a list of fruits
+while True:
+    print("\nSelamat Datang di Pasar Buah") # Create a title
+    print("\nList Menu: ")
+    print("1. Menampilkan Daftar Buah")
+    print("2. Menambahkan Buah")
+    print("3. Menghapus Buah")
+    print("4. Membeli Buah")
+    print("5. Exit Program")
+    print()
+    choice = int(input("Masukkan angka Menu yang ingin dijalankan: "))
+    
+    # Create a list of fruit purchases
+    list_of_fruits = { "Index" : ["0", "1", "2"],
+                       "Nama" : ["Apel", "Jeruk", "Anggur"],
+                       "Stock": [20, 15, 25],
+                       "Harga": [10_000, 15_000, 20_000]}
+    if choice == 1 :
+        print("\nDaftar Buah")
+        print("Index\t|Nama\t|Stock\t|Harga")
+        for choice in range(len(list_of_fruits["Index"])):
+            print(f"{list_of_fruits["Index"][choice]}\t|{list_of_fruits["Nama"][choice]}\t|{list_of_fruits["Stock"][choice]}\t|{list_of_fruits["Harga"][choice]}")
+    
+    # Add fruit to the list
+    elif choice == 2:
+        AddFruit = input("Masukkan Nama Buah\t:")
+        StockFruit = int(input("Masukkan Stock Buah\t:"))
+        Price = int(input("Masukkan Harga Buah\t:"))
+        Index = "3"
+        list_of_fruits["Index"].append(Index)
+        list_of_fruits["Nama"].append(AddFruit)
+        list_of_fruits["Stock"].append(StockFruit)
+        list_of_fruits["Harga"].append(Price)
+        print("\nDaftar Buah")
+        print("Index\t|Nama\t|Stock\t|Harga")
+        for choice in range(len(list_of_fruits["Index"])):
+            print(f"{list_of_fruits["Index"][choice]}\t|{list_of_fruits["Nama"][choice]}\t|{list_of_fruits["Stock"][choice]}\t|{list_of_fruits["Harga"][choice]}")
+    
+    # Remove the fruit in the list
+    elif choice == 3:
+        print("\nDaftar Buah")
+        print("Index\t|Nama\t|Stock\t|Harga")
+        for choice in range(len(list_of_fruits["Index"])):
+            print(f"{list_of_fruits["Index"][choice]}\t|{list_of_fruits["Nama"][choice]}\t|{list_of_fruits["Stock"][choice]}\t|{list_of_fruits["Harga"][choice]}")
+        index_remove = int(input("\nMasukkan Index Buah yang Akan Dihapus: "))
+        list_of_fruits ["Nama"].pop(index_remove)
+        list_of_fruits ["Stock"].pop(index_remove)
+        list_of_fruits ["Harga"].pop(index_remove)
+        for choice in range(len(list_of_fruits["Nama"])):
+            print(f"{list_of_fruits["Index"][choice]}\t|{list_of_fruits["Nama"][choice]}\t|{list_of_fruits["Stock"][choice]}\t|{list_of_fruits["Harga"][choice]}")
+        
+    # Create a purchases list
+    elif choice == 4:
+        print("\nDaftar Buah")
+        print("Index\t|Nama\t|Stock\t|Harga")
+        for choice in range(len(list_of_fruits["Nama"])):
+            print(f"{list_of_fruits["Index"][choice]}\t|{list_of_fruits["Nama"][choice]}\t|{list_of_fruits["Stock"][choice]}\t|{list_of_fruits["Harga"][choice]}")
+        option = "Ya"
+        total_payment = 0
+        list_buy = {"Nama" : [], "Stock" : [], "Harga" : []}
+        while option == "Ya":
+            index_buy = int(input("Masukkan Index Buah yang Ingin Dibeli: "))
+            if index_buy <= len(list_of_fruits["Nama"])-1:
+                buy_fruit = int(input("Masukkan Jumlah Buah yang Ingin Dibeli: "))
+                if buy_fruit <= list_of_fruits["Stock"][index_buy]:
+                    list_of_fruits["Stock"][index_buy] = list_of_fruits["Stock"][index_buy] - buy_fruit
+                    list_buy["Nama"].append(list_of_fruits["Nama"][index_buy])
+                    list_buy["Harga"].append(list_of_fruits["Harga"][index_buy])
+                    list_buy["Stock"].append(buy_fruit)
+                else:
+                    print(f"Stock buah tidak cukup, stock {list_of_fruits["Nama"][index_buy]} tinggal {list_of_fruits["Stock"][index_buy]}")
+
+            else:
+                print("Index Tidak Ada Didalam Daftar")
+            print("Isi Chart: ")
+            print("Nama\t|Qty\t|Harga\t")
+            for choice in range(len(list_buy["Nama"])):
+                print(f"{list_buy["Nama"][choice]}\t|{list_buy["Stock"][choice]}\t|{list_buy["Harga"][choice]}")
+            option = input("Mau beli yang Lain? (Ya/Tidak): ")
+        else:
+            for choice in range(len(list_buy["Nama"])):
+                total_payment = total_payment + (list_buy["Harga"][choice] * list_buy["Stock"][choice])
+            print("Total Yang Harus Dibayar: ", total_payment)
+            payment = 0
+            while total_payment > payment:
+                payment = int(input("\nMasukkan Jumlah Uang: "))
+                if total_payment > payment:
+                    lack_of_money = total_payment - payment
+                    print("Transaksi Anda Dibatalkan")
+                    print("Uang Anda Kurang Sebesar", lack_of_money)
+                    print()
+                elif total_payment == payment:
+                    print("Terimakasih!")
+                    print()
+                else:
+                    return_of_money = payment - total_payment
+                    print("Terimakasih!")
+                    print("Uang Kembalian Anda", return_of_money)
+        
+    elif choice == 5:
+        print("Exit Program")
+        break
+    else:
+        print("Menu Tidak Tersedia")
+        break
+
+
+
+
+
